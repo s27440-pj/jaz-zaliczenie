@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Configuration
 public class SwaggerConfig {
+    //I needed to create this because class ClientQuery was not automatically generated.
     @Bean
     public OpenApiCustomizer customerGlobalHeaderOpenApiCustomizer() {
         return openApi -> {
