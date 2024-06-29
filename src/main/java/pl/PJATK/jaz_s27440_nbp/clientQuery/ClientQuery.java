@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ClientQuery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(description = "Unique id of inquiry", example = "2")
+    @Schema(description = "Unique id of query", example = "2")
     private Long id;
     @Schema(description = "Currency name", example = "USD")
     private String currency;
@@ -22,10 +22,9 @@ public class ClientQuery {
     private LocalDate startDate;
     @Schema(description = "End of interval", example = "2024-05-21")
     private LocalDate endDate;
-    @Schema(description = "Calculated mean of currency from X calendar days")
+    @Schema(description = "Calculated mean of currency from startDate to endDate")
     private Double meanCourse;
-
-    @Schema(description = "Date of inquiry", example = "2024-03-25 14:55:00")
+    @Schema(description = "Date and time of query", example = "2024-03-25 14:55:00")
     private LocalDateTime queryDate;
 
     public ClientQuery() {

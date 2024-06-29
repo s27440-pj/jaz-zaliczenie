@@ -13,18 +13,16 @@ import java.time.LocalDateTime;
 @Service
 public class ClientQueryService {
 
-    private final ClientQueryRepository ClientQueryRepository;
+    private final ClientQueryRepository clientQueryRepository;
     private final RestTemplate restTemplate;
 
-    public ClientQueryService(ClientQueryRepository ClientQueryRepository, RestTemplate restTemplate) {
-        this.ClientQueryRepository = ClientQueryRepository;
+    public ClientQueryService(ClientQueryRepository clientQueryRepository, RestTemplate restTemplate) {
+        this.clientQueryRepository = clientQueryRepository;
         this.restTemplate = restTemplate;
     }
 
-    public double getMeanOfCurrency(String currency, Integer days) {
+    public double getMeanOfCurrency(String currency, LocalDate startDate, LocalDate endDate) {
         LocalDateTime today = LocalDateTime.now();
-        LocalDate endDate = LocalDate.now();
-        LocalDate startDate = endDate.minusDays(days -1);
 
         ResponseEntity<ExchangeRates> response = restTemplate
                 .getForEntity("https://api.nbp.pl/api/exchangerates/rates/A/{currency}/{startDate}/{endDate}?format=json",
@@ -38,16 +36,14 @@ public class ClientQueryService {
         }
         Double meanCourse = sum/(exchangeRates.getRates().size());
         //add to base
-        Inquiry inquiry = new Inquiry(currency, days, today, meanCourse);
-        ClientQueryRepository.save(inquiry);
+        ClientQuery query = new ClientQuery(currency, startDate, endDate, today, meanCourse);
+        clientQueryRepository.save(query);
 
         return meanCourse;
     }
 
-    public ExchangeRates getCurrency(String currency, Integer days) {
+    public ExchangeRates getCurrency(String currency, LocalDate startDate, LocalDate endDate) {
         LocalDateTime today = LocalDateTime.now();
-        LocalDate endDate = LocalDate.now();
-        LocalDate startDate = endDate.minusDays(days -1);
 
         ResponseEntity<ExchangeRates> response = restTemplate
                 .getForEntity("https://api.nbp.pl/api/exchangerates/rates/A/{currency}/{startDate}/{endDate}?format=json",
