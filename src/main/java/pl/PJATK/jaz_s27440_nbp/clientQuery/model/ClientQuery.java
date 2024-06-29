@@ -1,4 +1,4 @@
-package pl.PJATK.jaz_s27440_nbp.clientQuery;
+package pl.PJATK.jaz_s27440_nbp.clientQuery.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;

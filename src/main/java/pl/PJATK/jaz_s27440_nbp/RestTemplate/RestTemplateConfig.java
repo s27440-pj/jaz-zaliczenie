@@ -1,4 +1,4 @@
-package pl.PJATK.jaz_s27440_nbp.clientQuery;
+package pl.PJATK.jaz_s27440_nbp.RestTemplate;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,9 +1,11 @@
-package pl.PJATK.jaz_s27440_nbp.clientQuery;
+package pl.PJATK.jaz_s27440_nbp.clientQuery.service;
 
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import pl.PJATK.jaz_s27440_nbp.clientQuery.model.ClientQuery;
+import pl.PJATK.jaz_s27440_nbp.clientQuery.repository.ClientQueryRepository;
 import pl.PJATK.jaz_s27440_nbp.rate.ExchangeRates;
 import pl.PJATK.jaz_s27440_nbp.rate.Rate;
 
@@ -42,13 +44,14 @@ public class ClientQueryService {
         return meanCourse;
     }
 
-    public ExchangeRates getCurrency(String currency, LocalDate startDate, LocalDate endDate) {
-        LocalDateTime today = LocalDateTime.now();
-
-        ResponseEntity<ExchangeRates> response = restTemplate
-                .getForEntity("https://api.nbp.pl/api/exchangerates/rates/A/{currency}/{startDate}/{endDate}?format=json",
-                        ExchangeRates.class, currency, startDate, endDate);
-
-        return response.getBody();
-    }
+    //testing to see values of currency
+//    public ExchangeRates getCurrency(String currency, LocalDate startDate, LocalDate endDate) {
+//        LocalDateTime today = LocalDateTime.now();
+//
+//        ResponseEntity<ExchangeRates> response = restTemplate
+//                .getForEntity("https://api.nbp.pl/api/exchangerates/rates/A/{currency}/{startDate}/{endDate}?format=json",
+//                        ExchangeRates.class, currency, startDate, endDate);
+//
+//        return response.getBody();
+//    }
 }
